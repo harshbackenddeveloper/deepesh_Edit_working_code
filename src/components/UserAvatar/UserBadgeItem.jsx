@@ -5,11 +5,7 @@ import '../../assets/css/UserAvatar/UserBadgeItem.css'
 
 const UserBadgeItem = ({ user, handleFunction, admin }) => {
   return (
-    <Badge
-      className="userbadge_item_container"
-      variant="solid"
-      onClick={handleFunction}
-    >
+    <Badge className="userbadge_item_container" variant="solid" onClick={handleFunction}>
       {user.name}
       {admin === user._id && <span> (Admin)</span>}
       <CloseIcon pl={1} />

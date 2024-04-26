@@ -13,23 +13,10 @@ const ProfileModel = ({ user, children }) => {
     <Modal size={"lg"} isOpen={isOpen} onClose={onClose} isCentered >
       <ModalOverlay />
       <ModalContent h="410px">
-        <ModalHeader
-          className='fontS sizeF profile_model_header'
-        >{user.name}</ModalHeader>
-        <ModalBody
-          className='sizeF profile_model_body'
-        >
-          <Image
-            marginTop={"15px"}
-            borderRadius={"full"}
-            boxSize={"200px"}
-            src={user.pic?.url}
-            alt={user.name}
-          />
-          <Text
-            className='fontS'
-            fontSize={{ base: "28px", md: "15px" }}
-          >
+        <ModalHeader className='fontS sizeF profile_model_header'>{user.name}</ModalHeader>
+        <ModalBody className='sizeF profile_model_body'        >
+          <Image marginTop={"15px"} borderRadius={"full"} boxSize={"200px"} src={user.pic?.url} alt={user.name} />
+          <Text className='fontS' fontSize={{ base: "28px", md: "15px" }}>
             Email: {user.email}
           </Text>
         </ModalBody>
@@ -39,6 +26,7 @@ const ProfileModel = ({ user, children }) => {
             Close
           </Button>
         </ModalFooter>
+        
       </ModalContent>
     </Modal>
   </div>

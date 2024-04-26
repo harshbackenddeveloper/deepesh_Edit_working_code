@@ -31,6 +31,7 @@ const Sidebar = () => {
       toast.error("Error Occured!")
     }
   };
+
   const allUser = async () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     try {
@@ -40,13 +41,13 @@ const Sidebar = () => {
     } catch (error) {
       toast.error("Error Occured!")
     }
-
   }
+
   useEffect(() => {
     fetchNotifacation();
     allUser()
-    // eslint-disable-next-line
   }, [data, notification])
+
   const deleteNotifacation = async (_id) => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     try {
@@ -57,10 +58,12 @@ const Sidebar = () => {
       toast.error("Error Occured!")
     }
   }
+
   const logoutHandler = () => {
     localStorage.removeItem("userInfo")
     navigate('/', { replace: true })
   }
+
   const handleSearch = async (value) => {
     setSearch(value)
     if (!value) {
@@ -77,6 +80,7 @@ const Sidebar = () => {
       toast.error("Error Occured!")
     }
   }
+
   const accessChat = async (userId) => {
     try {
       setLoadingChat(true)
@@ -86,28 +90,22 @@ const Sidebar = () => {
       setSelectedChat(data)
       setLoadingChat(false);
       onClose();
-
     } catch (error) {
       toast.error("Error fetching the chat")
     }
   }
+  
   return (
     <div>
       <Box className='sidebar_container'>
-        <Tooltip label="Search Users to chat"
-          hasArrow placement='bottom-end'
-        >
+        <Tooltip label="Search Users to chat" hasArrow placement='bottom-end'        >
           <Button className='btn' variant="ghost" onClick={onOpen}>
             <i className="fas fa-search" />
-            <Text className='fontS sidebar_taxt_first' display={{ base: "none", md: "flex" }}  >
-              Search User
-            </Text>
+            <Text className='fontS sidebar_taxt_first' display={{ base: "none", md: "flex" }}>Search User</Text>
           </Button>
         </Tooltip>
-        <Text className='fontS sidebar_taxt_sec' >
-          ChatApp
-        </Text>
-        <div >
+        <Text className='fontS sidebar_taxt_sec' >ChatApp</Text>
+        <div>
           <Menu>
             <MenuButton p={1} className='bellIconBox' >
               <h5 className='IconInner' >
@@ -117,18 +115,10 @@ const Sidebar = () => {
             </MenuButton>
 
             <MenuList >
-
               {noti && noti.data && noti.data.length > 0 && noti.data.map((noti) => (
-                <MenuItem
-                  key={noti.chat._id}
-                  onClick={() => {
-                    setSelectedChat(noti.chat);
-                    deleteNotifacation(noti._id)
-                  }}
-                >
+                <MenuItem key={noti.chat._id} onClick={() => { setSelectedChat(noti.chat); deleteNotifacation(noti._id) }}>
                   {/* show notification details functionality */}
-
-                  {/* {noti.length > 0 ? <span> {"No Notifacation Message"}</span> : <span> {noti.names} :  {noti.messageData} </span>} */}
+                  {noti.length > 0 ? <span> {"No Notifacation Message"}</span> : <span> {noti.names} :  {noti.messageData} </span>}
                 </MenuItem>
               ))}
             </MenuList>
@@ -162,16 +152,13 @@ const Sidebar = () => {
                 <div className='sidebar_div_sec'>
                   {getUser && getUser.data.map((value) => {
                     return (
-
                       <div className="Mhover sidebar_div_third" onClick={() => accessChat(value._id)} >
-                        <div >
+                        <div>
                           <Avatar size={'md'} cursor={'pointer'} src={value.pic.url} />
-
                         </div>
                         <div>
                           <div><Text>{value.name}</Text></div>
                           <div><Text>{value.email}</Text></div>
-
                         </div>
                       </div>
                     )
@@ -179,36 +166,20 @@ const Sidebar = () => {
                 </div>
               </TabPanel>
 
-              <TabPanel><DrawerBody>
-                <Box display={'flex'} >
-                  <Input
-                    className='sizeF'
-                    placeholder='Search by name or email'
-                    mr={2}
-                    value={search}
-                    onChange={(e) => handleSearch(e.target.value)}
-                  />
-                </Box>
-                {loading ? (
-                  <ChatLoading />
-                ) : (
-                  searchResult?.map(user => (
-                    <UserListItem
-                      key={user._id}
-                      user={user}
-                      handleFunction={() => accessChat(user._id)}
-                    />
-                  ))
-                )}
-                {loadingChat && <Spinner ml={"auto"} display={"flex"} />}
-              </DrawerBody>
+              <TabPanel>
+                <DrawerBody>
+                  <Box display={'flex'}>
+                    <Input className='sizeF' placeholder='Search by name or email' mr={2} value={search} onChange={(e) => handleSearch(e.target.value)} />
+                  </Box>
+                  {loading ? (<ChatLoading />) : (searchResult?.map(user => (<UserListItem key={user._id} user={user} handleFunction={() => accessChat(user._id)} />)))}
+                  {loadingChat && <Spinner ml={"auto"} display={"flex"} />}
+                </DrawerBody>
               </TabPanel>
             </TabPanels>
           </DrawerContent>
         </Tabs>
       </Drawer>
     </div>
-
   )
 }
 

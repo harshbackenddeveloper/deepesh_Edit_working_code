@@ -1,19 +1,4 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
-  useDisclosure,
-  FormControl,
-  Input,
-  Box,
-  Spinner,
-  Avatar,
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, useDisclosure, FormControl, Input, Box, Spinner, Avatar } from "@chakra-ui/react";
 import { useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 import UserBadgeItem from "../UserAvatar/UserBadgeItem";
@@ -105,7 +90,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
     try {
       setLoading(true);
       const headers = generateHeaders(`${user.token}`)
-      const { data } = await commonApiRequest('put',`/api/chat/groupremove`, { chatId: selectedChat._id, userId: user1._id, }, headers)
+      const { data } = await commonApiRequest('put', `/api/chat/groupremove`, { chatId: selectedChat._id, userId: user1._id, }, headers)
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       fetchMessages();
@@ -124,69 +109,30 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent className="fontS">
-          <ModalHeader
-            className="updateGroup_header"
-          >
+          <ModalHeader className="updateGroup_header">
             {selectedChat.chatName}
           </ModalHeader>
 
           <ModalCloseButton />
           <ModalBody className="updateGroup_body">
             <Box className="updateGroup_box">
-              {selectedChat.users.map((u) => (
-                <UserBadgeItem
-                  key={u._id}
-                  user={u}
-                  admin={selectedChat.groupAdmin}
-                  handleFunction={() => handleRemove(u)}
-                />
-              ))}
+              {selectedChat.users.map((u) => (<UserBadgeItem key={u._id} user={u} admin={selectedChat.groupAdmin} handleFunction={() => handleRemove(u)} />))}
             </Box>
             <FormControl d="flex">
-              <Input
-                placeholder="Chat Name"
-                mb={3}
-                borderColor={"blackAlpha.300"}
-                value={groupChatName}
-                onChange={(e) => setGroupChatName(e.target.value)}
-              />
-              <Button
-                variant="solid"
-                colorScheme="blue"
-                ml={1}
-                mb={3}
-                isLoading={renameloading}
-                onClick={handleRename}
-              >
+              <Input placeholder="Chat Name" mb={3} borderColor={"blackAlpha.300"} value={groupChatName} onChange={(e) => setGroupChatName(e.target.value)} />
+              <Button variant="solid" colorScheme="blue" ml={1} mb={3} isLoading={renameloading} onClick={handleRename}>
                 Update
               </Button>
             </FormControl>
             <FormControl>
-              <Input
-                placeholder="Add User to group"
-                mb={1}
-                borderColor={"blackAlpha.300"}
-                onChange={(e) => handleSearch(e.target.value)}
-              />
+              <Input placeholder="Add User to group" mb={1} borderColor={"blackAlpha.300"} onChange={(e) => handleSearch(e.target.value)} />
             </FormControl>
 
-            {loading ? (
-              <Spinner size="lg" />
-            ) : (
-              searchResult?.map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => handleAddUser(user)}
-                />
-              ))
-            )}
+            {loading ? <Spinner size="lg" /> : searchResult?.map((user) => (<UserListItem key={user._id} user={user} handleFunction={() => handleAddUser(user)} />))}
+
           </ModalBody>
           <ModalFooter className="update-group">
-            <Button onClick={() => handleRemove(user)} colorScheme="blue">
-              Leave Group
-            </Button>
-          </ModalFooter>
+            <Button onClick={() => handleRemove(user)} colorScheme="blue">Leave Group</Button></ModalFooter>
         </ModalContent>
       </Modal>
     </>

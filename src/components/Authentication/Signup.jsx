@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import commonApiRequest from '../../api/commonApi';
+
 function Signup() {
     const [show, setShow] = useState()
     const [name, setName] = useState();
@@ -51,54 +52,36 @@ function Signup() {
     return <VStack spacing={"2px"}>
         <FormControl id="first-name" isRequired>
             <FormLabel className='sizeF fontS'>Name</FormLabel>
-            <Input className='sizeF' placeholder='Enter Your Name'
-                onChange={(e) => setName(e.target.value)} />
+            <Input className='sizeF' placeholder='Enter Your Name' onChange={(e) => setName(e.target.value)} />
         </FormControl>
+
         <FormControl id="email" isRequired className="fontS sizeF">
             <FormLabel className='fontS sizeF'>Email</FormLabel>
-            <Input className='fontS sizeF' placeholder='Enter Your Email'
-                onChange={(e) => setEmail(e.target.value)} />
+            <Input className='fontS sizeF' placeholder='Enter Your Email' onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
+
         <FormControl id="password" isRequired className="fontS sizeF">
             <FormLabel className='fontS sizeF'>Password</FormLabel>
             <InputGroup>
-                <Input
-                    className='fontS sizeF'
-                    type={show ? "text" : "password"}
-                    placeholder='Enter Your Password'
-                    onChange={(e) => setPassword(e.target.value)} />
+                <Input className='fontS sizeF' type={show ? "text" : "password"} placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
                 <InputRightElement width="4.5rem">
-                    <Button className='fontS' h="1.75rem" size="sm" color={"black"} onClick={handleClick}>
-                        {show ? "Hide" : "Show"}
-                    </Button>
+                    <Button className='fontS' h="1.75rem" size="sm" color={"black"} onClick={handleClick}>{show ? "Hide" : "Show"}</Button>
                 </InputRightElement>
             </InputGroup>
         </FormControl>
+
         <FormControl id="password" isRequired className="fontS">
             <FormLabel className='fontS sizeF'>Confirm Password</FormLabel>
             <InputGroup>
-                <Input
-                    className='fontS sizeF'
-                    type={show ? "text" : "password"}
-                    placeholder='Enter Your Confirm Password'
-                    onChange={(e) => setConfirmpassword(e.target.value)} />
+                <Input className='fontS sizeF' type={show ? "text" : "password"} placeholder='Enter Your Confirm Password' onChange={(e) => setConfirmpassword(e.target.value)} />
                 <InputRightElement width="4.5rem">
-                    <Button className='fontS' h="1.75rem" size="sm" color={"black"} onClick={handleClick}>
-                        {show ? "Hide" : "Show"}
-                    </Button>
+                    <Button className='fontS' h="1.75rem" size="sm" color={"black"} onClick={handleClick}>{show ? "Hide" : "Show"}</Button>
                 </InputRightElement>
             </InputGroup>
         </FormControl>
-        <Button
-            className='fontS sizeF'
-            colorScheme='blue'
-            width="100%"
-            style={{ marginTop: 15 }}
-            onClick={submitHandler}
-        >
-            Sign Up
-        </Button>
+
+        <Button className='fontS sizeF' colorScheme='blue' width="100%" style={{ marginTop: 15 }} onClick={submitHandler}>Sign Up</Button>
     </VStack>
 }
 
-export default Signup;
+export default Signup; 

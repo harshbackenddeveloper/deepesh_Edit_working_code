@@ -5,7 +5,6 @@ import { ChatState } from './Context/ChatProvider'
 import { isLastMessage, isSameSender, isSameSenderMargin, isSameUser, } from "../config/ChatLogic";
 import '../assets/css/ScrollableChat.css'
 
-
 const ScrollableChat = ({ messages }) => {
     const { user } = ChatState();
 
@@ -17,23 +16,13 @@ const ScrollableChat = ({ messages }) => {
                         {(isSameSender(messages, m, i, user._id) ||
                             isLastMessage(messages, i, user._id)) && (
                                 <Tooltip label={m.sender.name} placement="bottom-start" hasArrow>
-                                    <Avatar
-                                        mt="7px"
-                                        mr={1}
-                                        size="sm"
-                                        cursor="pointer"
-                                        name={m.sender.name}
-                                        src={m.sender.pic.url}
-                                    />
+                                    <Avatar mt="7px" mr={1} size="sm" cursor="pointer" name={m.sender.name} src={m.sender.pic.url} />
                                 </Tooltip>
                             )}
-                        <span
-                            className="scrollablechat_span"
+                        <span className="scrollablechat_span"
                             style={{
-                                backgroundColor: `${m.sender._id === user._id ? "#258c60" : "#ededed"
-                                    }`,
-                                color: `${m.sender._id === user._id ? "white" : ""
-                                    }`,
+                                backgroundColor: `${m.sender._id === user._id ? "#258c60" : "#ededed"}`,
+                                color: `${m.sender._id === user._id ? "white" : ""}`,
                                 marginLeft: isSameSenderMargin(messages, m, i, user._id),
                                 marginTop: isSameUser(messages, m, i, user._id) ? 3 : 10,
                             }}

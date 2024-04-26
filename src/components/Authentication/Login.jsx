@@ -31,8 +31,8 @@ const Login = () => {
           "Content-type": "application/json",
         },
       };
-     
-      const { data } =   await commonApiRequest('post', '/api/user/login', { email, password },config);
+
+      const { data } = await commonApiRequest('post', '/api/user/login', { email, password }, config);
       swal({
         title: "Login Successful",
         icon: "success",
@@ -52,52 +52,19 @@ const Login = () => {
     <VStack spacing="10px">
       <FormControl id="email" isRequired className="fontS ">
         <FormLabel className="fontS sizeF">Email Address</FormLabel>
-        <Input
-          className="sizeF"
-          value={email}
-          type="email"
-          placeholder="Enter Your Email Address"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <Input className="sizeF" value={email} type="email" placeholder="Enter Your Email Address" onChange={(e) => setEmail(e.target.value)} />
       </FormControl>
       <FormControl id="password" isRequired >
         <FormLabel className="fontS sizeF">Password</FormLabel>
         <InputGroup size="md">
-          <Input
-            className="sizeF"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type={show ? "text" : "password"}
-            placeholder="Enter password"
-          />
+          <Input className="sizeF" value={password} onChange={(e) => setPassword(e.target.value)} type={show ? "text" : "password"} placeholder="Enter password" />
           <InputRightElement width="4.5rem" className="fontS sizeF">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
+            <Button h="1.75rem" size="sm" onClick={handleClick}>{show ? "Hide" : "Show"}</Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <Button
-        className="sizeF"
-        colorScheme="blue"
-        width="100%"
-        style={{ marginTop: 15 }}
-        onClick={submitHandler}
-        isLoading={loading}
-      >
-        Login
-      </Button>
-      <Button
-        className="sizeF"
-        colorScheme="red"
-        width="100%"
-        onClick={() => {
-          setEmail("guest@example.com");
-          setPassword("123456");
-        }}
-      >
-        Get Guest User Credentials
-      </Button>
+      <Button className="sizeF" colorScheme="blue" width="100%" style={{ marginTop: 15 }} onClick={submitHandler} isLoading={loading}>Login</Button>
+      <Button className="sizeF" colorScheme="red" width="100%" onClick={() => { setEmail("guest@example.com"); setPassword("123456"); }} >Get Guest User Credentials</Button>
     </VStack>
   );
 };
